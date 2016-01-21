@@ -16,13 +16,21 @@ var bugQueries = [{"id": "blockingDiv",
 
 
 $(document).ready(function () {
-	var release = versions.aurora;
+	var version = getVersion();
 	
-	addVersionToQueryURLs(release);
+	addVersionToQueryURLs(version);
 	
-	getBugCounts(release);
+	getBugCounts(version);
 	
 });
+
+function getVersion(){
+	var version = $.url().param('version');
+	if(version && (version === "release" || version === "beta" || version === "aurora" || version === "nightly")){
+		return versions[version];
+	}
+	return versions.beta;
+}
 
 function addVersionToQueryURLs(release){
 	for(var i = 0; i < bugQueries.length; i++){
