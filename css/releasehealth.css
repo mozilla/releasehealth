@@ -1,0 +1,24 @@
+@font-face {
+    font-family: Moz;
+    /* src: url("MozTT-Medium.ttf"); */
+    src: url("https://assets.mozilla.org/file/asset/648/original/attachment");
+}
+
+body {
+	margin: 0px;
+}
+.title {
+	margin: 0px;
+	height:30vh;
+	background-color: #FF9500;
+	text-align: center;
+	font-size: 10vmin;
+	font-family: Moz;
+}
+
+.title div {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	
+}
