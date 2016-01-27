@@ -11,7 +11,7 @@ var bugQueries = [{"id": "blockingDiv",
 				   "title": "New Regressions",
 				   "url": "https://bugzilla.mozilla.org/rest/bug?v4=%3F&o5=equals&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"},
 				  {"id": "knowRegressionDiv",
-				   "title": "Known Regressions",
+				   "title": "Carryover Regressions",
 				   "url": "https://bugzilla.mozilla.org/rest/bug?v4=%3F&o5=equals&n2=1&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"}];
 					
 
