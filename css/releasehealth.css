@@ -6,6 +6,7 @@
 
 body {
 	margin: 0px;
+	font-family: Moz;
 }
 .title {
 	margin: 0px;
@@ -13,7 +14,6 @@ body {
 	background-color: #FF9500;
 	text-align: center;
 	font-size: 10vmin;
-	font-family: Moz;
 }
 
 .title div {
@@ -21,4 +21,25 @@ body {
 	height: 100%;
 	vertical-align: middle;
 	
+}
+
+#content {
+	height: 70vh;
+	padding-top: 10vh;
+	text-align: center;
+}
+
+.bugcount {
+	display: inline-block;
+	padding: 3vw;
+}
+
+.bugcount h2 {
+	font-size: 3vw;
+	font-weight: inherit;
+	width: 12ch;
+}
+.bugcount .data {
+	font-size: 10vw;
+	display: inline-block;
 }

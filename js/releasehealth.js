@@ -61,5 +61,5 @@ function getBugCounts(release){
 }
 
 function displayCount(divId, title, count){
-	$("#" + divId).replaceWith( "<div>" + title + ": " + count + "</div>" )
+	$("#" + divId).replaceWith( "<div class=\"bugcount\"><h2>" + title + "</h2><div class=\"data\">" + count + "</div></div>" )
 }
