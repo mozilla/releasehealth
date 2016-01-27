@@ -11,9 +11,18 @@ body {
 .title {
 	margin: 0px;
 	height:30vh;
-	background-color: #FF9500;
+	/* background-color: #FF9500; */
 	text-align: center;
 	font-size: 10vmin;
+}
+
+.title-bg {
+	position: absolute;
+	z-index: -1;
+	margin: 0px;
+	height:30vh;
+	border-bottom: 50px solid transparent;
+	border-right: 100vw solid #FF9500;
 }
 
 .title div {
@@ -25,7 +34,7 @@ body {
 
 #content {
 	height: 70vh;
-	padding-top: 10vh;
+	padding-top: 3vh;
 	text-align: center;
 }
 
