@@ -1,7 +1,8 @@
-var versions = {"release": 43, 
-				"beta": 44,
-				"aurora": 45, 
-				"nightly": 46}; 
+var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/firefox.png"},
+				"beta": {"version": 45, "title": "Beta", "img": "images/firefox-beta.png"},
+				"aurora": {"version": 46, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
+				"nightly": {"version": 47, "title": "Nightly", "img": "images/firefox-nightly.png"}
+			   }
 
 var bugQueries = [{"id": "blockingDiv",
 	               "title": "Blocking",
@@ -16,7 +17,10 @@ var bugQueries = [{"id": "blockingDiv",
 
 
 $(document).ready(function () {
-	var version = getVersion();
+	var channel = getChannel();
+	var version = getVersion(channel);
+	
+	setTitle(channel);
 	
 	addVersionToQueryURLs(version);
 	
@@ -24,12 +28,25 @@ $(document).ready(function () {
 	
 });
 
-function getVersion(){
-	var version = $.url().param('version');
-	if(version && (version === "release" || version === "beta" || version === "aurora" || version === "nightly")){
-		return versions[version];
+function getChannel(){
+	var channel = $.url().param('channel');
+	if(channel && (channel === "release" || channel === "beta" || channel === "aurora" || channel === "nightly")){
+		return channel;
 	}
-	return versions.beta;
+	return "beta";
+}
+
+function getVersion(channel){
+	return versions[channel].version;
+}
+
+function setTitle(channel){
+	$("#title").append(versions[channel].title + " Bug Count");
+	if(channel == "aurora" || channel == "nightly"){
+		$("#title").attr("class", "title-light");
+	}
+	$("#title-img").attr("src",versions[channel].img);
+	$("#header-bg").attr("class", "header-bg header-bg-" + channel);
 }
 
 function addVersionToQueryURLs(release){
