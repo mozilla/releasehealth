@@ -41,7 +41,7 @@ function getVersion(channel){
 }
 
 function setTitle(channel){
-	$("#title").append(versions[channel].title + " Bug Count");
+	$("#title").append(versions[channel].title + " " + versions[channel].version + " Bug Count");
 	if(channel == "aurora" || channel == "nightly"){
 		$("#title").attr("class", "title-light");
 	}
