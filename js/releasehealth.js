@@ -5,7 +5,7 @@ var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/fi
 			   }
 
 var bugQueries = [{"id": "blockingDiv",
-	               "title": "Blocking",
+	               "title": "Blocking Release",
 				   "url": "https://bugzilla.mozilla.org/rest/bug?o1=equals&v1=blocking&f1=cf_tracking_firefox{RELEASE}&resolution=---&query_format=advanced&include_fields=id",},
 				  {"id": "newRegressionDiv",
 				   "title": "New Regressions",
