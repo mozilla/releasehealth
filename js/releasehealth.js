@@ -20,7 +20,8 @@ $(document).ready(function () {
 	var channel = getChannel();
 	var version = getVersion(channel);
 	
-	setTitle(channel);
+	displayTitle(channel);
+	displayMeasures();
 	
 	addVersionToQueryURLs(version);
 	
@@ -40,13 +41,21 @@ function getVersion(channel){
 	return versions[channel].version;
 }
 
-function setTitle(channel){
+function displayTitle(channel){
 	$("#title").append(versions[channel].title + " " + versions[channel].version + " Bug Count");
 	if(channel == "aurora" || channel == "nightly"){
 		$("#title").attr("class", "title-light");
 	}
 	$("#title-img").attr("src",versions[channel].img);
 	$("#header-bg").attr("class", "header-bg header-bg-" + channel);
+}
+
+function displayMeasures(){
+	for(var i = 0; i < bugQueries.length; i++){
+		var query = bugQueries[i];
+		$("#" + query.id).replaceWith( "<div class=\"bugcount\"><h2>" + query.title + "</h2><div id=\"data" + i + "\" class=\"data greyedout\">?</div></div>" );
+	}
+	
 }
 
 function addVersionToQueryURLs(release){
@@ -64,11 +73,12 @@ function getBugCounts(release){
 		$.ajax({
 			  url: bugQuery.url,
 			  bugQuery: bugQuery,
+			  index: i,
 			  crossDomain:true, 
 			  dataType: 'json',
 			  success: function(data){
 			    this.bugQuery.count = data.bugs.length;
-			    displayCount(this.bugQuery.id, this.bugQuery.title, this.bugQuery.count);
+			    displayCount(this.index, this.bugQuery.count);
 			  },
 			  error: function(jqXHR, textStatus, errorThrown){
 				alert(textStatus);
@@ -77,6 +87,6 @@ function getBugCounts(release){
 	}
 }
 
-function displayCount(divId, title, count){
-	$("#" + divId).replaceWith( "<div class=\"bugcount\"><h2>" + title + "</h2><div class=\"data\">" + count + "</div></div>" )
+function displayCount(index, count){
+	$("#data" + index).replaceWith( "<div class=\"data\">" + count + "</div>" )
 }

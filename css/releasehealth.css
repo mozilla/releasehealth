@@ -66,3 +66,7 @@ body {
 	font-size: 10vw;
 	display: inline-block;
 }
+
+.greyedout {
+	color: #D4DDE4;
+}
