@@ -1,12 +1,11 @@
 @font-face {
     font-family: Moz;
-    /* src: url("MozTT-Medium.ttf"); */
-    src: url("https://assets.mozilla.org/file/asset/648/original/attachment");
+    src: url("../fonts/MozTT-Medium.ttf");
+    /* src: url("https://assets.mozilla.org/file/asset/648/original/attachment"); */
 }
 
 body {
 	margin: 0px;
-	font-family: Moz;
 }
 
 .header {
@@ -14,6 +13,7 @@ body {
 	height:30vh;
 	text-align: center;
 	font-size: 10vmin;
+	font-family: Moz;
 }
 
 .header-bg {
