@@ -32,6 +32,7 @@ $(document).ready(function () {
 	
 	if(display !== BIG_SCREEN){
 		displayForkOnGitHub();
+		displayChannelFooter(channel);
 	}
 	
 	addVersionToQueryURLs(version);
@@ -79,6 +80,10 @@ function displayMeasures(){
 
 function displayForkOnGitHub(){
 	$("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/lmandel/ReleaseHealth\">Fork me on GitHub</a></span>");
+}
+
+function displayChannelFooter(channel){
+	$("#body").append("<div id=\"footer\" class=\"footer-" + channel + "\">Channel &gt; <a href=\"?channel=release\">Release</a> | <a href=\"?channel=beta\">Beta</a> | <a href=\"?channel=aurora\">Developer Edition</a> | <a href=\"?channel=nightly\">Nighlty</a></div>");
 }
 
 function addVersionToQueryURLs(release){
