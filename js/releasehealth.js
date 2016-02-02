@@ -5,7 +5,7 @@ var BUGZILLA_URL = "https://bugzilla.mozilla.org/buglist.cgi";
 var BUGZILLA_REST_URL = "https://bugzilla.mozilla.org/rest/bug"
 
 var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/firefox.png"},
-				"beta": {"version": 45, "title": "Beta", "img": "images/firefox-beta.png"},
+				"beta": {"version": 45, "title": "Firefox Beta", "img": "images/firefox-beta.png"},
 				"aurora": {"version": 46, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
 				"nightly": {"version": 47, "title": "Nightly", "img": "images/firefox-nightly.png"}
 			   }
@@ -62,9 +62,10 @@ function getVersion(channel){
 }
 
 function displayTitle(channel){
-	$("#title").append(versions[channel].title + " " + versions[channel].version + " Bug Count");
+	$("#title").append(versions[channel].title + " " + versions[channel].version);
 	if(channel == "aurora" || channel == "nightly"){
 		$("#title").attr("class", "title-light");
+		$("#subtitle").attr("class", "subtitle title-light");
 	}
 	$("#title-img").attr("src",versions[channel].img);
 	$("#header-bg").attr("class", "header-bg header-bg-" + channel);
