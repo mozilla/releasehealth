@@ -38,11 +38,18 @@ body {
 .header div {
 	display: inline-block;
 	height: 100%;
-	vertical-align: middle;
+	vertical-align: top;
+	margin-top: 7vmin;
 }
 
 .title-light {
 	color: #EAEFF2;
+}
+
+.subtitle {
+	font-size: 5vmin;
+	margin-left: -40vmin;
+	padding-top: 10vmin;
 }
 
 #content {
