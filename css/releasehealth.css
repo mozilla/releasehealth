@@ -70,3 +70,12 @@ body {
 .greyedout {
 	color: #D4DDE4;
 }
+
+.data a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.data a:hover {
+	color: highlight;
+}

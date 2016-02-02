@@ -1,6 +1,9 @@
 var BIG_SCREEN = "bigscreen";
 var SMALL_SCREEN = "smallscreen";
 
+var BUGZILLA_URL = "https://bugzilla.mozilla.org/buglist.cgi";
+var BUGZILLA_REST_URL = "https://bugzilla.mozilla.org/rest/bug"
+
 var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/firefox.png"},
 				"beta": {"version": 45, "title": "Beta", "img": "images/firefox-beta.png"},
 				"aurora": {"version": 46, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
@@ -9,13 +12,13 @@ var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/fi
 
 var bugQueries = [{"id": "blockingDiv",
 	               "title": "Blocking Release",
-				   "url": "https://bugzilla.mozilla.org/rest/bug?o1=equals&v1=blocking&f1=cf_tracking_firefox{RELEASE}&resolution=---&query_format=advanced&include_fields=id",},
+				   "url": "?o1=equals&v1=blocking&f1=cf_tracking_firefox{RELEASE}&resolution=---&query_format=advanced&include_fields=id",},
 				  {"id": "newRegressionDiv",
 				   "title": "New Regressions",
-				   "url": "https://bugzilla.mozilla.org/rest/bug?v4=%3F&o5=equals&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"},
+				   "url": "?v4=%3F&o5=equals&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"},
 				  {"id": "knowRegressionDiv",
 				   "title": "Carryover Regressions",
-				   "url": "https://bugzilla.mozilla.org/rest/bug?v4=%3F&o5=equals&n2=1&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"}];
+				   "url": "?v4=%3F&o5=equals&n2=1&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"}];
 					
 
 
@@ -91,14 +94,14 @@ function getBugCounts(release){
 	for(var i = 0; i < bugQueries.length; i++){
 		var bugQuery = bugQueries[i];
 		$.ajax({
-			  url: bugQuery.url,
+			  url: BUGZILLA_REST_URL + bugQuery.url,
 			  bugQuery: bugQuery,
 			  index: i,
 			  crossDomain:true, 
 			  dataType: 'json',
 			  success: function(data){
 			    this.bugQuery.count = data.bugs.length;
-			    displayCount(this.index, this.bugQuery.count);
+			    displayCount(this.index, this.bugQuery.count, BUGZILLA_URL + this.bugQuery.url);
 			  },
 			  error: function(jqXHR, textStatus, errorThrown){
 				alert(textStatus);
@@ -107,6 +110,6 @@ function getBugCounts(release){
 	}
 }
 
-function displayCount(index, count){
-	$("#data" + index).replaceWith( "<div class=\"data\">" + count + "</div>" )
+function displayCount(index, count, url){
+	$("#data" + index).replaceWith( "<div class=\"data\"><a href=\"" + url + "\">" + count + "</a></div>" )
 }
