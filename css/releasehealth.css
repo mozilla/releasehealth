@@ -1,7 +1,6 @@
 @font-face {
     font-family: Moz;
     src: url("../fonts/MozTT-Medium.ttf");
-    /* src: url("https://assets.mozilla.org/file/asset/648/original/attachment"); */
 }
 
 body {
@@ -47,7 +46,7 @@ body {
 }
 
 #content {
-	height: 70vh;
+	height: 67vh;
 	padding-top: 3vh;
 	text-align: center;
 }
@@ -69,4 +68,45 @@ body {
 
 .greyedout {
 	color: #D4DDE4;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	color: highlight;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	left: 0px;
+	height: 4vh;
+	padding-top: 2vh;
+	font-family: Moz;
+	font-size: 2vmin;
+	text-align: center;
+}
+
+#footer a{
+	padding-top: 1vmin;
+	padding-left: 3vmin;
+	padding-right: 3vmin;
+}
+
+.footer-release, .footer-beta {
+	background-color: #FF9500;
+}
+
+.footer-aurora {
+	background-color: #00539F;
+	color: #EAEFF2;
+}
+
+.footer-nightly {
+	background-color: #002147;
+	color: #EAEFF2;
 }
