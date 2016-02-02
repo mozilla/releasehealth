@@ -1,3 +1,6 @@
+var BIG_SCREEN = "bigscreen";
+var SMALL_SCREEN = "smallscreen";
+
 var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/firefox.png"},
 				"beta": {"version": 45, "title": "Beta", "img": "images/firefox-beta.png"},
 				"aurora": {"version": 46, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
@@ -18,10 +21,15 @@ var bugQueries = [{"id": "blockingDiv",
 
 $(document).ready(function () {
 	var channel = getChannel();
+	var display = getDisplay();
 	var version = getVersion(channel);
 	
 	displayTitle(channel);
 	displayMeasures();
+	
+	if(display !== BIG_SCREEN){
+		displayForkOnGitHub();
+	}
 	
 	addVersionToQueryURLs(version);
 	
@@ -35,6 +43,14 @@ function getChannel(){
 		return channel;
 	}
 	return "beta";
+}
+
+function getDisplay(){
+	var display = $.url().param('display');
+	if(display && (display === BIG_SCREEN)){
+		return BIG_SCREEN;
+	}
+	return SMALL_SCREEN;
 }
 
 function getVersion(channel){
@@ -56,6 +72,10 @@ function displayMeasures(){
 		$("#" + query.id).replaceWith( "<div class=\"bugcount\"><h2>" + query.title + "</h2><div id=\"data" + i + "\" class=\"data greyedout\">?</div></div>" );
 	}
 	
+}
+
+function displayForkOnGitHub(){
+	$("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/lmandel/ReleaseHealth\">Fork me on GitHub</a></span>");
 }
 
 function addVersionToQueryURLs(release){
