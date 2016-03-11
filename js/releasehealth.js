@@ -4,10 +4,10 @@ var SMALL_SCREEN = "smallscreen";
 var BUGZILLA_URL = "https://bugzilla.mozilla.org/buglist.cgi";
 var BUGZILLA_REST_URL = "https://bugzilla.mozilla.org/rest/bug"
 
-var versions = {"release": {"version": 44, "title": "Firefox", "img": "images/firefox.png"},
-				"beta": {"version": 45, "title": "Firefox Beta", "img": "images/firefox-beta.png"},
-				"aurora": {"version": 46, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
-				"nightly": {"version": 47, "title": "Nightly", "img": "images/firefox-nightly.png"}
+var versions = {"release": {"version": 45, "title": "Firefox", "img": "images/firefox.png"},
+				"beta": {"version": 46, "title": "Firefox Beta", "img": "images/firefox-beta.png"},
+				"aurora": {"version": 47, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
+				"nightly": {"version": 48, "title": "Nightly", "img": "images/firefox-nightly.png"}
 			   }
 
 var bugQueries = [{"id": "blockingDiv",
