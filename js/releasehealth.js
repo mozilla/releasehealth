@@ -1,28 +1,23 @@
 var BIG_SCREEN = "bigscreen";
 var SMALL_SCREEN = "smallscreen";
 
-var BUGZILLA_URL = "https://bugzilla.mozilla.org/buglist.cgi";
-var BUGZILLA_REST_URL = "https://bugzilla.mozilla.org/rest/bug"
-
-var versions = {"release": {"version": 45, "title": "Firefox", "img": "images/firefox.png"},
-				"beta": {"version": 46, "title": "Firefox Beta", "img": "images/firefox-beta.png"},
-				"aurora": {"version": 47, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
-				"nightly": {"version": 48, "title": "Nightly", "img": "images/firefox-nightly.png"}
-			   }
-
-var bugQueries = [{"id": "blockingDiv",
-	               "title": "Blocking Release",
-				   "url": "?v4=affected&f1=cf_tracking_firefox{RELEASE}&o3=equals&v3=---&o1=equals&j2=OR&f4=cf_status_firefox{RELEASE}&query_format=advanced&f3=cf_status_firefox{RELEASE}&f2=OP&o4=equals&f5=CP&v1=blocking&include_fields=id",},
-				  {"id": "newRegressionDiv",
-				   "title": "New Regressions",
-				   "url": "?v4=%3F&o5=equals&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"},
-				  {"id": "knowRegressionDiv",
-				   "title": "Carryover Regressions",
-				   "url": "?v4=%3F&o5=equals&n2=1&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"}];
-					
-
+var BUGZILLA_URL;
+var BUGZILLA_REST_URL;
+var versions;
+var bugQueries;
 
 $(document).ready(function () {
+	$.getJSON('js/bzconfig.json', function(data) {
+		main(data);
+	});
+});
+
+function main(bzconfig){
+	BUGZILLA_URL = bzconfig.BUGZILLA_URL;
+	BUGZILLA_REST_URL = bzconfig.BUGZILLA_REST_URL;
+	versions = bzconfig.versions;
+	bugQueries = bzconfig.bugQueries;
+
 	var channel = getChannel();
 	var display = getDisplay();
 	var version = getVersion(channel);
@@ -39,7 +34,7 @@ $(document).ready(function () {
 	
 	getBugCounts(version);
 	
-});
+}
 
 function getChannel(){
 	var channel = $.url().param('channel');
