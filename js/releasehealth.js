@@ -80,7 +80,7 @@ function displayMeasures(){
 }
 
 function displayForkOnGitHub(){
-	$("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/lmandel/ReleaseHealth\">Fork me on GitHub</a></span>");
+	$("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/mozilla/ReleaseHealth\">Fork me on GitHub</a></span>");
 }
 
 function displayChannelFooter(channel){
