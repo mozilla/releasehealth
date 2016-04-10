@@ -1,121 +1,127 @@
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
+/* vim: set ts=8 sts=2 et sw=2 tw=80: */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 var BIG_SCREEN = "bigscreen";
 var SMALL_SCREEN = "smallscreen";
 
-var BUGZILLA_URL = "https://bugzilla.mozilla.org/buglist.cgi";
-var BUGZILLA_REST_URL = "https://bugzilla.mozilla.org/rest/bug"
-
-var versions = {"release": {"version": 45, "title": "Firefox", "img": "images/firefox.png"},
-				"beta": {"version": 46, "title": "Firefox Beta", "img": "images/firefox-beta.png"},
-				"aurora": {"version": 47, "title": "Developer Edition", "img": "images/firefox-developer.png"}, 
-				"nightly": {"version": 48, "title": "Nightly", "img": "images/firefox-nightly.png"}
-			   }
-
-var bugQueries = [{"id": "blockingDiv",
-	               "title": "Blocking Release",
-				   "url": "?v4=affected&f1=cf_tracking_firefox{RELEASE}&o3=equals&v3=---&o1=equals&j2=OR&f4=cf_status_firefox{RELEASE}&query_format=advanced&f3=cf_status_firefox{RELEASE}&f2=OP&o4=equals&f5=CP&v1=blocking&include_fields=id",},
-				  {"id": "newRegressionDiv",
-				   "title": "New Regressions",
-				   "url": "?v4=%3F&o5=equals&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"},
-				  {"id": "knowRegressionDiv",
-				   "title": "Carryover Regressions",
-				   "url": "?v4=%3F&o5=equals&n2=1&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"}];
-					
-
+var BUGZILLA_URL;
+var BUGZILLA_REST_URL;
+var versions;
+var bugQueries;
 
 $(document).ready(function () {
-	var channel = getChannel();
-	var display = getDisplay();
-	var version = getVersion(channel);
-	
-	displayTitle(channel);
-	displayMeasures();
-	
-	if(display !== BIG_SCREEN){
-		displayForkOnGitHub();
-		displayChannelFooter(channel);
-	}
-	
-	addVersionToQueryURLs(version);
-	
-	getBugCounts(version);
-	
+  $.getJSON('js/bzconfig.json', function(data) {
+    main(data);
+  });
 });
 
-function getChannel(){
-	var channel = $.url().param('channel');
-	if(channel && (channel === "release" || channel === "beta" || channel === "aurora" || channel === "nightly")){
-		return channel;
-	}
-	return "beta";
+function main(bzconfig) {
+  BUGZILLA_URL = bzconfig.BUGZILLA_URL;
+  BUGZILLA_REST_URL = bzconfig.BUGZILLA_REST_URL;
+  versions = bzconfig.versions;
+  bugQueries = bzconfig.bugQueries;
+
+  var channel = getChannel();
+  var display = getDisplay();
+  var version = getVersion(channel);
+
+  displayTitle(channel);
+  displayMeasures();
+
+  if (display !== BIG_SCREEN) {
+    displayForkOnGitHub();
+    displayChannelFooter(channel);
+  }
+
+  addVersionToQueryURLs(version);
+
+  getBugCounts(version);
 }
 
-function getDisplay(){
-	var display = $.url().param('display');
-	if(display && (display === BIG_SCREEN)){
-		return BIG_SCREEN;
-	}
-	return SMALL_SCREEN;
+function getChannel() {
+  var channel = $.url().param('channel');
+  if (channel && (channel === "release" || channel === "beta" ||
+                  channel === "aurora" || channel === "nightly")) {
+    return channel;
+  }
+  return "beta";
 }
 
-function getVersion(channel){
-	return versions[channel].version;
+function getDisplay() {
+  var display = $.url().param('display');
+  if (display && (display === BIG_SCREEN)) {
+    return BIG_SCREEN;
+  }
+  return SMALL_SCREEN;
 }
 
-function displayTitle(channel){
-	$("#title").append(versions[channel].title + " " + versions[channel].version);
-	if(channel == "aurora" || channel == "nightly"){
-		$("#title").attr("class", "title-light");
-		$("#subtitle").attr("class", "subtitle title-light");
-	}
-	$("#title-img").attr("src",versions[channel].img);
-	$("#header-bg").attr("class", "header-bg header-bg-" + channel);
+function getVersion(channel) {
+  return versions[channel].version;
 }
 
-function displayMeasures(){
-	for(var i = 0; i < bugQueries.length; i++){
-		var query = bugQueries[i];
-		$("#" + query.id).replaceWith( "<div class=\"bugcount\"><h2>" + query.title + "</h2><div id=\"data" + i + "\" class=\"data greyedout\">?</div></div>" );
-	}
-	
+function displayTitle(channel) {
+  $("#title").append(versions[channel].title + " "
+                     + versions[channel].version);
+  if (channel == "aurora" || channel == "nightly") {
+    $("#title").attr("class", "title-light");
+    $("#subtitle").attr("class", "subtitle title-light");
+  }
+  $("#title-img").attr("src",versions[channel].img);
+  $("#header-bg").attr("class", "header-bg header-bg-" + channel);
+}
+
+function displayMeasures() {
+  for (var i = 0; i < bugQueries.length; i++) {
+    var query = bugQueries[i];
+    $("#" + query.id).replaceWith("<div class=\"bugcount\"><h2>"
+                                  + query.title + "</h2>"
+                                  + "<div id=\"data" + i + "\""
+                                  + " class=\"data greyedout\">?</div></div>");
+  }
 }
 
 function displayForkOnGitHub(){
-	$("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/mozilla/ReleaseHealth\">Fork me on GitHub</a></span>");
+  $("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/mozilla/ReleaseHealth\">Fork me on GitHub</a></span>");
 }
 
-function displayChannelFooter(channel){
-	$("#body").append("<div id=\"footer\" class=\"footer-" + channel + "\">Channel &gt; <a href=\"?channel=release\">Release</a> | <a href=\"?channel=beta\">Beta</a> | <a href=\"?channel=aurora\">Developer Edition</a> | <a href=\"?channel=nightly\">Nightly</a></div>");
+function displayChannelFooter(channel) {
+  $("#body").append("<div id=\"footer\" class=\"footer-" + channel + "\">Channel &gt; <a href=\"?channel=release\">Release</a> | <a href=\"?channel=beta\">Beta</a> | <a href=\"?channel=aurora\">Developer Edition</a> | <a href=\"?channel=nightly\">Nightly</a></div>");
 }
 
-function addVersionToQueryURLs(release){
-	for(var i = 0; i < bugQueries.length; i++){
-		var url = bugQueries[i].url
-		url = url.replace(/{RELEASE}/g, release);
-		url = url.replace(/{OLDERRELEASE}/g, release-1);
-		bugQueries[i].url = url;
-	}
+function addVersionToQueryURLs(release) {
+  for (var i = 0; i < bugQueries.length; i++) {
+    var url = bugQueries[i].url;
+    url = url.replace(/{RELEASE}/g, release);
+    url = url.replace(/{OLDERRELEASE}/g, release-1);
+    bugQueries[i].url = url;
+  }
 }
 
-function getBugCounts(release){
-	for(var i = 0; i < bugQueries.length; i++){
-		var bugQuery = bugQueries[i];
-		$.ajax({
-			  url: BUGZILLA_REST_URL + bugQuery.url,
-			  bugQuery: bugQuery,
-			  index: i,
-			  crossDomain:true, 
-			  dataType: 'json',
-			  success: function(data){
-			    this.bugQuery.count = data.bugs.length;
-			    displayCount(this.index, this.bugQuery.count, BUGZILLA_URL + this.bugQuery.url);
-			  },
-			  error: function(jqXHR, textStatus, errorThrown){
-				alert(textStatus);
-			  }
-		});
-	}
+function getBugCounts(release) {
+  for (var i = 0; i < bugQueries.length; i++) {
+    var bugQuery = bugQueries[i];
+    $.ajax({
+      url: BUGZILLA_REST_URL + bugQuery.url,
+      bugQuery: bugQuery,
+      index: i,
+      crossDomain:true,
+      dataType: 'json',
+      success: function(data) {
+        this.bugQuery.count = data.bugs.length;
+        displayCount(this.index, this.bugQuery.count,
+                     BUGZILLA_URL + this.bugQuery.url);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert(textStatus);
+      }
+    });
+  }
 }
 
-function displayCount(index, count, url){
-	$("#data" + index).replaceWith( "<div class=\"data\"><a href=\"" + url + "\">" + count + "</a></div>" )
+function displayCount(index, count, url) {
+  $("#data" + index).replaceWith("<div class=\"data\"><a href=\"" + url
+                                 + "\">" + count + "</a></div>" );
 }
