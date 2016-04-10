@@ -1,119 +1,119 @@
 @font-face {
-    font-family: Moz;
-    src: url("../fonts/MozTT-Medium.ttf");
+  font-family: Moz;
+  src: url("../fonts/MozTT-Medium.ttf");
 }
 
 body {
-	margin: 0px;
+  margin: 0px;
 }
 
 .header {
-	margin: 0px;
-	height:30vh;
-	text-align: center;
-	font-size: 10vmin;
-	font-family: Moz;
+  margin: 0px;
+  height:30vh;
+  text-align: center;
+  font-size: 10vmin;
+  font-family: Moz;
 }
 
 .header-bg {
-	position: absolute;
-	z-index: -1;
-	margin: 0px;
-	height:30vh;
-	border-bottom: 50px solid transparent;
+  position: absolute;
+  z-index: -1;
+  margin: 0px;
+  height:30vh;
+  border-bottom: 50px solid transparent;
 }
 
 .header-bg-release, .header-bg-beta {
-	border-right: 100vw solid #FF9500;
+  border-right: 100vw solid #FF9500;
 }
 
 .header-bg-aurora {
-	border-right: 100vw solid #00539F;
+  border-right: 100vw solid #00539F;
 }
 
 .header-bg-nightly {
-	border-right: 100vw solid #002147;
+  border-right: 100vw solid #002147;
 }
 
 .header div {
-	display: inline-block;
-	height: 100%;
-	vertical-align: top;
-	margin-top: 7vmin;
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  margin-top: 7vmin;
 }
 
 .title-light {
-	color: #EAEFF2;
+  color: #EAEFF2;
 }
 
 .subtitle {
-	font-size: 5vmin;
-	margin-left: -40vmin;
-	padding-top: 10vmin;
+  font-size: 5vmin;
+  margin-left: -40vmin;
+  padding-top: 10vmin;
 }
 
 #content {
-	height: 67vh;
-	padding-top: 3vh;
-	text-align: center;
+  height: 67vh;
+  padding-top: 3vh;
+  text-align: center;
 }
 
 .bugcount {
-	display: inline-block;
-	padding: 3vw;
+  display: inline-block;
+  padding: 3vw;
 }
 
 .bugcount h2 {
-	font-size: 3vw;
-	font-weight: inherit;
-	width: 12ch;
+  font-size: 3vw;
+  font-weight: inherit;
+  width: 12ch;
 }
 .bugcount .data {
-	font-size: 10vw;
-	display: inline-block;
+  font-size: 10vw;
+  display: inline-block;
 }
 
 .greyedout {
-	color: #D4DDE4;
+  color: #D4DDE4;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 a:hover {
-	color: highlight;
+  color: highlight;
 }
 
 #footer {
-	position: fixed;
-	bottom: 0px;
-	width: 100%;
-	left: 0px;
-	height: 4vh;
-	padding-top: 2vh;
-	font-family: Moz;
-	font-size: 2vmin;
-	text-align: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  left: 0px;
+  height: 4vh;
+  padding-top: 2vh;
+  font-family: Moz;
+  font-size: 2vmin;
+  text-align: center;
 }
 
 #footer a{
-	padding-top: 1vmin;
-	padding-left: 3vmin;
-	padding-right: 3vmin;
+  padding-top: 1vmin;
+  padding-left: 3vmin;
+  padding-right: 3vmin;
 }
 
 .footer-release, .footer-beta {
-	background-color: #FF9500;
+  background-color: #FF9500;
 }
 
 .footer-aurora {
-	background-color: #00539F;
-	color: #EAEFF2;
+  background-color: #00539F;
+  color: #EAEFF2;
 }
 
 .footer-nightly {
-	background-color: #002147;
-	color: #EAEFF2;
+  background-color: #002147;
+  color: #EAEFF2;
 }

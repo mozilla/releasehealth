@@ -1,0 +1,43 @@
+{
+  "BUGZILLA_URL": "https://bugzilla.mozilla.org/buglist.cgi",
+  "BUGZILLA_REST_URL": "https://bugzilla.mozilla.org/rest/bug",
+  "versions": {
+    "release": {
+      "version": 45,
+      "title": "Firefox",
+      "img": "images/firefox.png"
+    },
+    "beta": {
+      "version": 46,
+      "title": "Firefox Beta",
+      "img": "images/firefox-beta.png"
+    },
+    "aurora": {
+      "version": 47,
+      "title": "Developer Edition",
+      "img": "images/firefox-developer.png"
+    },
+    "nightly": {
+      "version": 48,
+      "title": "Nightly",
+      "img": "images/firefox-nightly.png"
+    }
+  },
+  "bugQueries": [
+    {
+      "id": "blockingDiv",
+      "title": "Blocking Release",
+      "url": "?v4=affected&f1=cf_tracking_firefox{RELEASE}&o3=equals&v3=---&o1=equals&j2=OR&f4=cf_status_firefox{RELEASE}&query_format=advanced&f3=cf_status_firefox{RELEASE}&f2=OP&o4=equals&f5=CP&v1=blocking&include_fields=id"
+    },
+    {
+      "id": "newRegressionDiv",
+      "title": "New Regressions",
+      "url": "?v4=%3F&o5=equals&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"
+    },
+    {
+      "id": "knowRegressionDiv",
+      "title": "Carryover Regressions",
+      "url": "?v4=%3F&o5=equals&n2=1&keywords=regression%2C&keywords_type=allwords&f1=cf_status_firefox{RELEASE}&o3=equals&v3=unaffected&o1=equals&j2=OR&resolution=---&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f3=cf_status_firefox{OLDERRELEASE}&f2=OP&o4=equals&f5=cf_status_firefox{OLDERRELEASE}&v1=affected&f6=CP&include_fields=id"
+    }
+  ]
+}
