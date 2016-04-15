@@ -39,6 +39,9 @@ function main(bzconfig) {
   addVersionToQueryURLs(version);
 
   getBugCounts(version);
+
+  // Update counts periodically
+  window.setInterval(getBugCounts, bzconfig.refreshMinutes * 60 * 1000, version);
 }
 
 function getChannel() {
@@ -104,15 +107,18 @@ function getBugCounts(release) {
   for (var i = 0; i < bugQueries.length; i++) {
     var bugQuery = bugQueries[i];
     $.ajax({
-      url: BUGZILLA_REST_URL + bugQuery.url,
+      url: BUGZILLA_REST_URL + bugQuery.url + '&count_only=1',
       bugQuery: bugQuery,
       index: i,
       crossDomain:true,
       dataType: 'json',
-      success: function(data) {
-        this.bugQuery.count = data.bugs.length;
-        displayCount(this.index, this.bugQuery.count,
-                     BUGZILLA_URL + this.bugQuery.url);
+      ifModified: true,
+      success: function(data, status) {
+        if (status === 'success') {
+          this.bugQuery.count = data.bug_count;
+          displayCount(this.index, this.bugQuery.count,
+                       BUGZILLA_URL + this.bugQuery.url);
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert(textStatus);
