@@ -121,7 +121,7 @@ function getBugCounts(release) {
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        alert(textStatus);
+        console.error(textStatus);
       }
     });
   }
