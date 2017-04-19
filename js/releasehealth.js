@@ -47,7 +47,7 @@ function main(bzconfig) {
 function getChannel() {
   var channel = $.url().param('channel');
   if (channel && (channel === "release" || channel === "beta" ||
-                  channel === "aurora" || channel === "nightly")) {
+                  channel === "nightly")) {
     return channel;
   }
   return "beta";
@@ -68,7 +68,7 @@ function getVersion(channel) {
 function displayTitle(channel) {
   $("#title").append(versions[channel].title + " "
                      + versions[channel].version);
-  if (channel == "aurora" || channel == "nightly") {
+  if (channel == "nightly") {
     $("#title").attr("class", "title-light");
     $("#subtitle").attr("class", "subtitle title-light");
   }
@@ -91,7 +91,7 @@ function displayForkOnGitHub(){
 }
 
 function displayChannelFooter(channel) {
-  $("#body").append("<div id=\"footer\" class=\"footer-" + channel + "\">Channel &gt; <a href=\"?channel=release\">Release</a> | <a href=\"?channel=beta\">Beta</a> | <a href=\"?channel=aurora\">Developer Edition</a> | <a href=\"?channel=nightly\">Nightly</a></div>");
+  $("#body").append("<div id=\"footer\" class=\"footer-" + channel + "\">Channel &gt; <a href=\"?channel=release\">Release</a> | <a href=\"?channel=beta\">Beta</a> | <a href=\"?channel=nightly\">Nightly</a></div>");
 }
 
 function addVersionToQueryURLs(release) {
