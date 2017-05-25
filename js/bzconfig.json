@@ -27,12 +27,12 @@
     {
       "id": "newRegressionDiv",
       "title": "New Regressions",
-      "url": "?v4=%3F&f10=resolution&o5=equals&keywords=regression%2C&f1=cf_status_firefox{RELEASE}&keywords_type=allwords&o3=equals&f8=resolution&v11=INCOMPLETE&o11=notequals&v3=unaffected&j2=OR&o1=equals&o9=notequals&v10=WORKSFORME&f13=CP&f9=resolution&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f12=resolution&o10=notequals&query_format=advanced&v9=WONTFIX&f3=cf_status_firefox{OLDERRELEASE}&o4=equals&f2=OP&v12=EXPIRED&f11=resolution&o12=notequals&f5=cf_status_firefox{OLDERRELEASE}&v8=INVALID&v1=affected&f6=CP&f7=OP&o8=notequals&include_fields=id"
+      "url": "?v4=%3F&f10=resolution&o5=equals&keywords=regression%2C&f1=cf_status_firefox{RELEASE}&keywords_type=allwords&o3=equals&f8=resolution&v11=INCOMPLETE&o11=notequals&v3=unaffected&j2=OR&o1=equals&o9=notequals&v10=WORKSFORME&f13=CP&f9=resolution&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f12=resolution&o10=notequals&query_format=advanced&v9=WONTFIX&f3=cf_status_firefox{OLDERRELEASE}&o4=equals&f2=OP&v12=EXPIRED&v13=FIXED&f11=resolution&o12=notequals&f5=cf_status_firefox{OLDERRELEASE}&v8=INVALID&v1=affected&f6=CP&f7=OP&o8=notequals&include_fields=id"
     },
     {
       "id": "knowRegressionDiv",
       "title": "Carryover Regressions",
-      "url": "?v4=%3F&f10=resolution&o5=equals&n2=1&keywords=regression%2C&f1=cf_status_firefox{RELEASE}&keywords_type=allwords&o3=equals&f8=resolution&v11=INCOMPLETE&o11=notequals&v3=unaffected&j2=OR&o1=equals&o9=notequals&v10=WORKSFORME&f13=CP&f9=resolution&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f12=resolution&o10=notequals&query_format=advanced&v9=WONTFIX&f3=cf_status_firefox{OLDERRELEASE}&o4=equals&f2=OP&v12=EXPIRED&f11=resolution&o12=notequals&f5=cf_status_firefox{OLDERRELEASE}&v8=INVALID&v1=affected&f6=CP&f7=OP&o8=notequals&include_fields=id"
+      "url": "?v4=%3F&f10=resolution&o5=equals&n2=1&keywords=regression%2C&f1=cf_status_firefox{RELEASE}&keywords_type=allwords&o3=equals&f8=resolution&v11=INCOMPLETE&o11=notequals&v3=unaffected&j2=OR&o1=equals&o9=notequals&v10=WORKSFORME&f13=CP&f9=resolution&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f12=resolution&o10=notequals&query_format=advanced&v9=WONTFIX&f3=cf_status_firefox{OLDERRELEASE}&o4=equals&f2=OP&v12=EXPIRED&v13=FIXED&f11=resolution&o12=notequals&f5=cf_status_firefox{OLDERRELEASE}&v8=INVALID&v1=affected&f6=CP&f7=OP&o8=notequals&include_fields=id"
     }
   ],
   "refreshMinutes": 30
