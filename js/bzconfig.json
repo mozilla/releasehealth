@@ -3,17 +3,17 @@
   "BUGZILLA_REST_URL": "https://bugzilla.mozilla.org/rest/bug",
   "versions": {
     "release": {
-      "version": 54,
+      "version": 55,
       "title": "Firefox",
       "img": "images/firefox.png"
     },
     "beta": {
-      "version": 55,
+      "version": 56,
       "title": "Firefox Beta",
       "img": "images/firefox-beta.png"
     },
     "nightly": {
-      "version": 56,
+      "version": 57,
       "title": "Nightly",
       "img": "images/firefox-nightly.png"
     }
