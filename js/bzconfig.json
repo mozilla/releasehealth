@@ -1,19 +1,17 @@
 {
   "BUGZILLA_URL": "https://bugzilla.mozilla.org/buglist.cgi",
   "BUGZILLA_REST_URL": "https://bugzilla.mozilla.org/rest/bug",
+  "VERSIONS_URL": "https://product-details.mozilla.org/1.0/firefox_versions.json",
   "versions": {
     "release": {
-      "version": 58,
       "title": "Firefox",
       "img": "images/firefox.png"
     },
     "beta": {
-      "version": 59,
       "title": "Firefox Beta",
       "img": "images/firefox-beta.png"
     },
     "nightly": {
-      "version": 60,
       "title": "Nightly",
       "img": "images/firefox-nightly.png"
     }
