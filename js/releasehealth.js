@@ -13,16 +13,22 @@ var versions;
 var bugQueries;
 
 $(document).ready(function () {
-  $.getJSON('js/bzconfig.json', function(data) {
-    main(data);
+  $.getJSON('js/bzconfig.json', function(bzconfig) {
+    $.getJSON(bzconfig.VERSIONS_URL, function(fxversions) {
+      main(bzconfig, fxversions);
+    });
   });
 });
 
-function main(bzconfig) {
+function main(bzconfig, fxversions) {
   BUGZILLA_URL = bzconfig.BUGZILLA_URL;
   BUGZILLA_REST_URL = bzconfig.BUGZILLA_REST_URL;
   versions = bzconfig.versions;
   bugQueries = bzconfig.bugQueries;
+
+  versions['nightly'].version = fxversions.FIREFOX_NIGHTLY.split('.', 1)[0];
+  versions['beta'].version = fxversions.LATEST_FIREFOX_DEVEL_VERSION.split('.', 1)[0];
+  versions['release'].version = fxversions.LATEST_FIREFOX_VERSION.split('.', 1)[0];
 
   var channel = getChannel();
   var display = getDisplay();
