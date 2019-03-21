@@ -20,7 +20,7 @@
     {
       "id": "blockingDiv",
       "title": "Blocking Release",
-      "url": "?v4=affected&f1=cf_tracking_firefox{RELEASE}&o3=equals&v3=---&o1=equals&j2=OR&f4=cf_status_firefox{RELEASE}&f3=cf_status_firefox{RELEASE}&f2=OP&o4=equals&f5=CP&v1=blocking&include_fields=id"
+      "url": "?resolution=---&resolution=FIXED&cf_tracking_firefox{RELEASE}=blocking&cf_status_firefox{RELEASE}=---&cf_status_firefox{RELEASE}=affected&include_fields=id"
     },
     {
       "id": "newRegressionDiv",
