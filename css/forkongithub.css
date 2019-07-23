@@ -1,4 +1,4 @@
-/* 
+/*
   Based on Pure CSS responsive "Fork me on GitHub" ribbon by Chris Heilmann
 */
 
@@ -48,16 +48,13 @@
     height:200px;
     z-index:9999;
   }
+
   #forkongithub a{
     width:200px;
     position:absolute;
     top:60px;
     left:-60px;
     transform:rotate(-45deg);
-    -webkit-transform:rotate(-45deg);
-    -ms-transform:rotate(-45deg);
-    -moz-transform:rotate(-45deg);
-    -o-transform:rotate(-45deg);
     box-shadow:4px 4px 10px rgba(0,0,0,0.8);
   }
 }

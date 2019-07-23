@@ -4,16 +4,13 @@
   "VERSIONS_URL": "https://product-details.mozilla.org/1.0/firefox_versions.json",
   "versions": {
     "release": {
-      "title": "Firefox",
-      "img": "images/firefox-logo.svg"
+      "title": "Firefox"
     },
     "beta": {
-      "title": "Firefox Beta",
-      "img": "images/firefox-logo-beta.svg"
+      "title": "Firefox Beta"
     },
     "nightly": {
-      "title": "Nightly",
-      "img": "images/firefox-logo-nightly.svg"
+      "title": "Firefox Nightly"
     }
   },
   "bugQueries": [
