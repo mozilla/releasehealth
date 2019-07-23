@@ -4,14 +4,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-var BIG_SCREEN = "bigscreen";
-var SMALL_SCREEN = "smallscreen";
-
-var BUGZILLA_URL;
-var BUGZILLA_REST_URL;
-var versions;
-var bugQueries;
-
 $(document).ready(function () {
   $.getJSON('js/bzconfig.json', function(bzconfig) {
     $.getJSON(bzconfig.VERSIONS_URL, function(fxversions) {
@@ -31,15 +23,19 @@ function main(bzconfig, fxversions) {
   versions['release'].version = fxversions.LATEST_FIREFOX_VERSION.split('.', 1)[0];
 
   var channel = getChannel();
-  var display = getDisplay();
-  var version = getVersion(channel);
+  var version = versions[channel].version;
 
-  displayTitle(channel);
+  // Add a class name to the body element that corresponds to the channel, allows per channel css
+  document.body.classList.add(channel);
+
+  // Display title
+  $("#title").text(versions[channel].title + " " + versions[channel].version);
+
   displayMeasures();
 
-  if (display !== BIG_SCREEN) {
-    displayForkOnGitHub();
-    displayChannelFooter(channel);
+  // if there is a display=bigscreen parameter in the url, we hide some clutter (office TV displays)
+  if (getURLParam('display') === 'bigscreen') {
+    document.body.classList.add("bigscreen");
   }
 
   addVersionToQueryURLs(version);
@@ -51,35 +47,16 @@ function main(bzconfig, fxversions) {
 }
 
 function getChannel() {
-  var channel = $.url().param('channel');
-  if (channel && (channel === "release" || channel === "beta" ||
-                  channel === "nightly")) {
+  var channel = getURLParam('channel');
+  if (channel && ['release', 'beta', 'nightly'].includes(channel)) {
     return channel;
   }
+  // By default, without a query parameter in the url, we display Beta
   return "beta";
 }
 
-function getDisplay() {
-  var display = $.url().param('display');
-  if (display && (display === BIG_SCREEN)) {
-    return BIG_SCREEN;
-  }
-  return SMALL_SCREEN;
-}
-
-function getVersion(channel) {
-  return versions[channel].version;
-}
-
-function displayTitle(channel) {
-  $("#title").append(versions[channel].title + " "
-                     + versions[channel].version);
-  if (channel == "nightly") {
-    $("#title").attr("class", "title-light");
-    $("#subtitle").attr("class", "subtitle title-light");
-  }
-  $("#title-img").attr("src",versions[channel].img);
-  $("#header-bg").attr("class", "header-bg header-bg-" + channel);
+function getURLParam(param) {
+  return new URLSearchParams(window.location.search).get(param);
 }
 
 function displayMeasures() {
@@ -90,14 +67,6 @@ function displayMeasures() {
                                   + "<div id=\"data" + i + "\""
                                   + " class=\"data greyedout\">?</div></div>");
   }
-}
-
-function displayForkOnGitHub(){
-  $("#body").append("<span id=\"forkongithub\"><a href=\"https://github.com/mozilla/ReleaseHealth\">Fork me on GitHub</a></span>");
-}
-
-function displayChannelFooter(channel) {
-  $("#body").append("<div id=\"footer\" class=\"footer-" + channel + "\">Channel &gt; <a href=\"?channel=release\">Release</a> | <a href=\"?channel=beta\">Beta</a> | <a href=\"?channel=nightly\">Nightly</a></div>");
 }
 
 function addVersionToQueryURLs(release) {
