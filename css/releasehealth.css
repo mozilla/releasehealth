@@ -4,11 +4,17 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   margin: 0;
   text-align: center;
 }
 
-header, footer {
+header,
+footer {
   font-family: Moz;
   margin: 0;
 }
@@ -38,7 +44,7 @@ header h1 {
 header h1:before {
   background: url('../images/firefox-logo-beta.svg') no-repeat;
   background-color: #FF9500;
-  display:inline-block;
+  display: inline-block;
   content: " ";
   height: 200px;
   width: 200px;
@@ -58,8 +64,10 @@ header h2 {
 }
 
 #content {
+  flex: auto;
   display: flex;
-  justify-content: center
+  align-items: center;
+  justify-content: center;
 }
 
 .bugcount {
@@ -67,10 +75,12 @@ header h2 {
 }
 
 .bugcount h2 {
+  margin-top: 0;
   font-size: 3vw;
   font-weight: inherit;
   width: 12ch;
 }
+
 .bugcount .data {
   font-size: 10vw;
   display: inline-block;
@@ -90,22 +100,19 @@ a:hover {
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
   height: 4vh;
   padding-top: 2vh;
   font-size: 2vmin;
 }
 
-footer a{
+footer a {
   padding-top: 1vmin;
   padding-left: 3vmin;
   padding-right: 3vmin;
 }
 
-.release footer, .beta footer {
+.release footer,
+.beta footer {
   background-color: #FF9500;
 }
 
@@ -135,6 +142,7 @@ footer a{
 .nightly #subtitle {
   color: #EAEFF2;
 }
+
 .nightly header,
 .nightly footer {
   background-color: #002147;
@@ -149,10 +157,10 @@ footer a{
 
 .bigscreen footer,
 .bigscreen #forkongithub {
-  display:none;
+  display: none;
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width: 800px) {
   header {
     font-size: 4vmin;
   }

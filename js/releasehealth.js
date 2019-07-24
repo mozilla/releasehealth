@@ -4,105 +4,125 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-$(document).ready(function () {
-  $.getJSON('js/bzconfig.json', function(bzconfig) {
-    $.getJSON(bzconfig.VERSIONS_URL, function(fxversions) {
-      main(bzconfig, fxversions);
-    });
-  });
-});
+/**
+ * Implement the Firefox Release Health Dashboard.
+ */
+class ReleaseHealth {
+  /**
+   * Initialize a new `ReleaseHealth` instance.
+   */
+  constructor() {
+    this.params = new URLSearchParams(location.search);
+    this.channel = this.getChannel();
 
-function main(bzconfig, fxversions) {
-  BUGZILLA_URL = bzconfig.BUGZILLA_URL;
-  BUGZILLA_REST_URL = bzconfig.BUGZILLA_REST_URL;
-  versions = bzconfig.versions;
-  bugQueries = bzconfig.bugQueries;
+    this.loadConfig();
 
-  versions['nightly'].version = fxversions.FIREFOX_NIGHTLY.split('.', 1)[0];
-  versions['beta'].version = fxversions.LATEST_FIREFOX_DEVEL_VERSION.split('.', 1)[0];
-  versions['release'].version = fxversions.LATEST_FIREFOX_VERSION.split('.', 1)[0];
+    // Add a class name to the body element that corresponds to the channel, allows per channel CSS
+    document.body.classList.add(this.channel);
 
-  var channel = getChannel();
-  var version = versions[channel].version;
-
-  // Add a class name to the body element that corresponds to the channel, allows per channel css
-  document.body.classList.add(channel);
-
-  // Display title
-  $("#title").text(versions[channel].title + " " + versions[channel].version);
-
-  displayMeasures();
-
-  // if there is a display=bigscreen parameter in the url, we hide some clutter (office TV displays)
-  if (getURLParam('display') === 'bigscreen') {
-    document.body.classList.add("bigscreen");
+    // If there is a `display=bigscreen` parameter in the URL, we hide some clutter (office TV displays)
+    if (this.params.get('display') === 'bigscreen') {
+      document.body.classList.add('bigscreen');
+    }
   }
 
-  addVersionToQueryURLs(version);
+  /**
+   * Get a channel name in the URL params. Use the Beta channel by default if missing.
+   * @returns {String} Channel name, e.g. "beta".
+   */
+  getChannel() {
+    const channel = this.params.get('channel');
 
-  getBugCounts(version);
-
-  // Update counts periodically
-  window.setInterval(getBugCounts, bzconfig.refreshMinutes * 60 * 1000, version);
-}
-
-function getChannel() {
-  var channel = getURLParam('channel');
-  if (channel && ['release', 'beta', 'nightly'].includes(channel)) {
-    return channel;
+    return channel && ['release', 'beta', 'nightly'].includes(channel) ? channel : 'beta';
   }
-  // By default, without a query parameter in the url, we display Beta
-  return "beta";
-}
 
-function getURLParam(param) {
-  return new URLSearchParams(window.location.search).get(param);
-}
-
-function displayMeasures() {
-  for (var i = 0; i < bugQueries.length; i++) {
-    var query = bugQueries[i];
-    $("#" + query.id).replaceWith("<div class=\"bugcount\"><h2>"
-                                  + query.title + "</h2>"
-                                  + "<div id=\"data" + i + "\""
-                                  + " class=\"data greyedout\">?</div></div>");
+  /**
+   * Fetch a remote JSON file and return the results.
+   * @param {String} url URL to fetch.
+   * @returns {Promise.<Object>} Decoded JSON.
+   */
+  async getJSON(url) {
+    return fetch(url).then(response => response.json());
   }
-}
 
-function addVersionToQueryURLs(release) {
-  for (var i = 0; i < bugQueries.length; i++) {
-    var url = bugQueries[i].url;
-    url = url.replace(/{RELEASE}/g, release);
-    url = url.replace(/{OLDERRELEASE}/g, release-1);
-    bugQueries[i].url = url;
+  /**
+   * Load the configuration file as well as product details.
+   */
+  async loadConfig() {
+    this.config = await this.getJSON('js/bzconfig.json');
+    this.versions = await this.getJSON(this.config.VERSIONS_URL);
+
+    for (const channel of Object.values(this.config.channels)) {
+      channel.version = Number(this.versions[channel.pd_key].match(/^\d+/)[0]);
+    }
+
+    this.renderUI();
   }
-}
 
-function getBugCounts(release) {
-  for (var i = 0; i < bugQueries.length; i++) {
-    var bugQuery = bugQueries[i];
-    $.ajax({
-      url: BUGZILLA_REST_URL + bugQuery.url + '&count_only=1',
-      bugQuery: bugQuery,
-      index: i,
-      crossDomain:true,
-      dataType: 'json',
-      ifModified: true,
-      success: function(data, status) {
-        if (status === 'success') {
-          this.bugQuery.count = data.bug_count;
-          displayCount(this.index, this.bugQuery.count,
-                       BUGZILLA_URL + this.bugQuery.url);
+  /**
+   * Start rendering the UI.
+   */
+  renderUI() {
+    const { title, version } = this.config.channels[this.channel];
+
+    document.querySelector('#title').textContent = `${title} ${version}`;
+
+    this.addVersionToQueryURLs(version);
+    this.displayMeasures();
+    this.getBugCounts();
+
+    // Update counts periodically
+    window.setInterval(() => this.getBugCounts(), this.config.refreshMinutes * 60 * 1000);
+  }
+
+  /**
+   * Replace version placeholders in the query URL.
+   * @param {Number} version Firefox version number, e.g. 70.
+   */
+  addVersionToQueryURLs(version) {
+    for (const query of this.config.bugQueries) {
+      query.url = query.url.replace(/{RELEASE}/g, version).replace(/{OLDERRELEASE}/g, version - 1);
+    }
+  }
+
+  /**
+   * Display the measures with a placeholder.
+   */
+  displayMeasures() {
+    for (const { id, title, url } of this.config.bugQueries) {
+      document.querySelector(`#${id}`).innerHTML =
+        `<h2>${title}</h2><a class="data greyedout" href="${this.config.BUGZILLA_URL}${url}">?</a>`;
+    }
+  }
+
+  /**
+   * Fetch the number of bugs for all the queries.
+   */
+  getBugCounts() {
+    for (const query of this.config.bugQueries) {
+      // Use an inner `async` so the loop continues
+      (async () => {
+        const { bug_count } = await this.getJSON(`${this.config.BUGZILLA_REST_URL}${query.url}&count_only=1`);
+
+        if (bug_count !== undefined) {
+          query.count = bug_count;
+          this.displayCount(query);
         }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error(textStatus);
-      }
-    });
+      })();
+    }
   }
-}
 
-function displayCount(index, count, url) {
-  $("#data" + index).replaceWith("<div class=\"data\"><a href=\"" + url
-                                 + "\">" + count + "</a></div>" );
-}
+  /**
+   * Display the number of bugs for a query.
+   * @param {String} id Element ID.
+   * @param {Number} count Number of bugs.
+   */
+  displayCount({ id, count }) {
+    const $placeholder = document.querySelector(`#${id} .data`);
+
+    $placeholder.textContent = count;
+    $placeholder.classList.remove('greyedout');
+  }
+};
+
+window.addEventListener('DOMContentLoaded', () => new ReleaseHealth(), { once: true });

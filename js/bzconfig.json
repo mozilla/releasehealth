@@ -2,14 +2,17 @@
   "BUGZILLA_URL": "https://bugzilla.mozilla.org/buglist.cgi",
   "BUGZILLA_REST_URL": "https://bugzilla.mozilla.org/rest/bug",
   "VERSIONS_URL": "https://product-details.mozilla.org/1.0/firefox_versions.json",
-  "versions": {
+  "channels": {
     "release": {
+      "pd_key": "LATEST_FIREFOX_VERSION",
       "title": "Firefox"
     },
     "beta": {
+      "pd_key": "LATEST_FIREFOX_DEVEL_VERSION",
       "title": "Firefox Beta"
     },
     "nightly": {
+      "pd_key": "FIREFOX_NIGHTLY",
       "title": "Firefox Nightly"
     }
   },
