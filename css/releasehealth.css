@@ -4,70 +4,83 @@
 }
 
 body {
-  margin: 0px;
-}
-
-.header {
-  margin: 0px;
-  height:30vh;
-  text-align: center;
-  font-size: 10vmin;
-  font-family: Moz;
-}
-
-.header-bg {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  z-index: -1;
-  margin: 0px;
-  height:30vh;
-  border-bottom: 50px solid transparent;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  text-align: center;
 }
 
-.header-bg-release, .header-bg-beta {
+header,
+footer {
+  font-family: Moz;
+  margin: 0;
+}
+
+header {
+  font-size: 6vmin;
+  background-color: #FF9500;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+#diag {
+  width: 100%;
+  height: 90px;
+  background: #FF9500;
+  clip-path: polygon(0% 0%, 100% 0%, 139% 100%, 0% 0%);
+}
+
+header h1 {
+  font-weight: normal;
+  font-family: Moz;
+  margin: 0;
+}
+
+header h1:before {
+  background: url('../images/firefox-logo-beta.svg') no-repeat;
+  background-color: #FF9500;
+  display: inline-block;
+  content: " ";
+  height: 200px;
+  width: 200px;
+  vertical-align: middle;
+}
+
+header h2 {
+  font-family: Moz;
+  font-size: 80%;
+  text-indent: 20%;
+  margin-top: -1em;
+}
+
+.release .header-bg,
+.beta .header-bg {
   border-right: 100vw solid #FF9500;
 }
 
-.header-bg-aurora {
-  border-right: 100vw solid #00539F;
-}
-
-.header-bg-nightly {
-  border-right: 100vw solid #002147;
-}
-
-.header div {
-  display: inline-block;
-  height: 100%;
-  vertical-align: top;
-  margin-top: 7vmin;
-}
-
-.title-light {
-  color: #EAEFF2;
-}
-
-.subtitle {
-  font-size: 5vmin;
-  margin-left: -40vmin;
-  padding-top: 10vmin;
-}
-
 #content {
-  height: 67vh;
-  padding-top: 3vh;
-  text-align: center;
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bugcount {
-  display: inline-block;
   padding: 3vw;
 }
 
 .bugcount h2 {
+  margin-top: 0;
   font-size: 3vw;
   font-weight: inherit;
   width: 12ch;
 }
+
 .bugcount .data {
   font-size: 10vw;
   display: inline-block;
@@ -86,29 +99,79 @@ a:hover {
   color: highlight;
 }
 
-#footer {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  left: 0px;
+footer {
   height: 4vh;
   padding-top: 2vh;
-  font-family: Moz;
   font-size: 2vmin;
-  text-align: center;
 }
 
-#footer a{
+footer a {
   padding-top: 1vmin;
   padding-left: 3vmin;
   padding-right: 3vmin;
 }
 
-.footer-release, .footer-beta {
+.release footer,
+.beta footer {
   background-color: #FF9500;
 }
 
-.footer-nightly {
+/* release rules */
+.release h1:before {
+  background: url('../images/firefox-logo.svg') no-repeat 30% center;
+  background-color: #FF9500;
+}
+
+/* beta rules */
+.beta h1:before {
+  background: url('../images/firefox-logo-beta.svg') no-repeat 30% center;
+  background-color: #FF9500;
+}
+
+/* Nightly rules */
+.nightly h1:before {
+  background: url('../images/firefox-logo-nightly.svg') no-repeat 30% center;
+  background-color: #002147;
+}
+
+.nightly .header-bg {
+  border-right: 100vw solid #002147;
+}
+
+.nightly #title,
+.nightly #subtitle {
+  color: #EAEFF2;
+}
+
+.nightly header,
+.nightly footer {
   background-color: #002147;
   color: #EAEFF2;
+}
+
+.nightly #diag {
+  background: #002147;
+}
+
+/* Big Screen rules (office TVs) */
+
+.bigscreen footer,
+.bigscreen #forkongithub {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    font-size: 4vmin;
+  }
+
+  header h1:before {
+    width: 80px;
+    height: 80px;
+  }
+
+  header h2 {
+    font-size: 80%;
+    margin-top: 0;
+  }
 }

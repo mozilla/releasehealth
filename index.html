@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <title>Firefox Release Health</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/svg+xml" href="images/firefox-logo-glyph.svg"/>
     <link rel="stylesheet" type="text/css" href="css/releasehealth.css">
     <link rel="stylesheet" type="text/css" href="css/forkongithub.css">
-    <script src="js/libs/jquery-1.12.3.min.js"></script>
-    <script src="js/libs/purl-2.3.1/purl.js"></script>
     <script src="js/releasehealth.js"></script>
   </head>
-  <body id="body">
-    <div id="header-bg" class="header-bg"></div>
-    <div class="header"><img id="title-img" src="images/firefox-logo.svg" height="100%"/><div id="title"></div><div id="subtitle" class="subtitle">Unresolved Bug Count</div></div>
+  <body>
+      <header>
+        <h1 id="title">Firefox</h1>
+        <h2 id="subtitle">Unresolved Bug Count</h2>
+      </header>
+      <div id="diag">
+      </div>
     <div id="content">
       <div class="bugcount" id="blockingDiv"></div>
       <div class="bugcount" id="newRegressionDiv"></div>
       <div class="bugcount" id="knowRegressionDiv"></div>
     </div>
+    <span id="forkongithub"><a href="https://github.com/mozilla/ReleaseHealth">Fork me on GitHub</a></span>
+    <footer>Channel &gt; <a href="?channel=release">Release</a> | <a href="?channel=beta">Beta</a> | <a href="?channel=nightly">Nightly</a></footer>
   </body>
 </html>
