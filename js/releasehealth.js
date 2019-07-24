@@ -91,7 +91,7 @@ class ReleaseHealth {
   displayMeasures() {
     for (const { id, title, url } of this.config.bugQueries) {
       document.querySelector(`#${id}`).innerHTML =
-        `<h2>${title}<h2><a class="data greyedout" href="${this.config.BUGZILLA_URL}${url}">?</a>`;
+        `<h2>${title}</h2><a class="data greyedout" href="${this.config.BUGZILLA_URL}${url}">?</a>`;
     }
   }
 
