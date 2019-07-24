@@ -69,10 +69,10 @@ class ReleaseHealth {
 
     this.addVersionToQueryURLs(version);
     this.displayMeasures();
-    this.getBugCounts(version);
+    this.getBugCounts();
 
     // Update counts periodically
-    window.setInterval(() => this.getBugCounts(version), this.config.refreshMinutes * 60 * 1000);
+    window.setInterval(() => this.getBugCounts(), this.config.refreshMinutes * 60 * 1000);
   }
 
   /**
