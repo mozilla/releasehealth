@@ -5,7 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /**
- * Impalement the Firefox Release Health Dashboard.
+ * Implement the Firefox Release Health Dashboard.
  */
 class ReleaseHealth {
   /**
