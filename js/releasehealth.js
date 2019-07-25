@@ -14,11 +14,12 @@ class ReleaseHealth {
   constructor() {
     this.params = new URLSearchParams(location.search);
     this.channel = this.getChannel();
-
+    this.project = this.getProject();
     this.loadConfig();
 
-    // Add a class name to the body element that corresponds to the channel, allows per channel CSS
-    document.body.classList.add(this.channel);
+    // Add a class name to the body element that corresponds to the channel/project, allows specific CSS
+    var cssClass = (this.project !== '')  ? this.project : this.channel;
+    document.body.classList.add(cssClass);
 
     // If there is a `display=bigscreen` parameter in the URL, we hide some clutter (office TV displays)
     if (this.params.get('display') === 'bigscreen') {
@@ -34,6 +35,16 @@ class ReleaseHealth {
     const channel = this.params.get('channel');
 
     return channel && ['release', 'beta', 'nightly'].includes(channel) ? channel : 'beta';
+  }
+
+  /**
+   * Get a project name in the URL params. Empty string as default value.
+   * @returns {String} Project name, e.g. "skyline".
+   */
+  getProject() {
+    const project = this.params.get('project');
+
+    return project && ['skyline'].includes(project) ? project : '';
   }
 
   /**
@@ -63,7 +74,12 @@ class ReleaseHealth {
    * Start rendering the UI.
    */
   renderUI() {
-    const { title, version } = this.config.channels[this.channel];
+    var { title, version } = this.config.channels[this.channel];
+
+    // Skyline and other projects
+    if (this.project !== '') {
+      var { title, version } = this.config.projects[this.project];
+    }
 
     document.querySelector('#title').textContent = `${title} ${version}`;
 
@@ -102,6 +118,16 @@ class ReleaseHealth {
    */
   getBugCounts() {
     for (const query of this.config.bugQueries) {
+      // Don't fetch remote json not used in project view
+      if (this.project !== '' && ! query.id.startsWith(this.project)) {
+        continue;
+      }
+
+      // Don't fetch remote json not used in channel view
+      if (this.project === '' && ! query.id.endsWith('Div')) {
+        continue;
+      }
+
       // Use an inner `async` so the loop continues
       (async () => {
         const { bug_count } = await this.getJSON(`${this.config.BUGZILLA_REST_URL}${query.url}&count_only=1`);

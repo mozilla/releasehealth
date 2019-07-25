@@ -16,6 +16,12 @@
       "title": "Firefox Nightly"
     }
   },
+  "projects": {
+    "skyline": {
+      "title": " Skyline: Firefox",
+      "version": 70
+    }
+  },
   "bugQueries": [
     {
       "id": "blockingDiv",
@@ -31,6 +37,21 @@
       "id": "knowRegressionDiv",
       "title": "Carryover Regressions",
       "url": "?v4=%3F&f10=resolution&o5=equals&n2=1&keywords=regression%2C&f1=cf_status_firefox{RELEASE}&keywords_type=allwords&o3=equals&f8=resolution&v11=INCOMPLETE&o11=notequals&v3=unaffected&j2=OR&o1=equals&o9=notequals&v10=WORKSFORME&f13=CP&f9=resolution&f4=cf_status_firefox{OLDERRELEASE}&v5=---&f12=resolution&o10=notequals&query_format=advanced&v9=WONTFIX&f3=cf_status_firefox{OLDERRELEASE}&o4=equals&f2=OP&v12=EXPIRED&f11=resolution&o12=notequals&f5=cf_status_firefox{OLDERRELEASE}&v8=INVALID&v1=affected&f6=CP&f7=OP&o8=notequals&f14=keywords&f15=priority&f16=priority&o14=notsubstring&o15=notequals&o16=notequals&v14=stalled&v15=p4&v16=p5&include_fields=id"
+    },
+    {
+      "id": "skylineP1",
+      "title": "P1",
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=P1"
+    },
+    {
+      "id": "skylineOpenNotP1",
+      "title": "P2-P5",
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=P2&priority=P3&priority=P4&priority=P5"
+    },
+    {
+      "id": "skylineUntriaged",
+      "title": "Untriaged",
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=--"
     }
   ],
   "refreshMinutes": 30

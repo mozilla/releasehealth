@@ -160,6 +160,28 @@ footer a {
   display: none;
 }
 
+/* Skyline rules, to be removed after the Skyline project */
+.skyline header,
+.skyline #diag,
+.skyline footer {
+  background-color: #20123a;
+  color: white;
+}
+
+
+.skyline header h1:before {
+  background: url('../images/firefox_masterbrand.svg') no-repeat;
+}
+
+body:not(.skyline) .bugcount.skyline {
+  display:none;
+}
+
+.skyline .bugcount:not(.skyline) {
+  display:none;
+}
+
+/* smaller dispkay rules */
 @media screen and (max-width: 800px) {
   header {
     font-size: 4vmin;
