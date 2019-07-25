@@ -89,7 +89,9 @@ class ReleaseHealth {
    * Display the measures with a placeholder.
    */
   displayMeasures() {
-    for (const { id, title, url } of this.config.bugQueries) {
+    for (let { id, title, url } of this.config.bugQueries) {
+      var firefox = this.config.channels[this.channel];
+      url += encodeURI(`&title=${firefox.title} ${firefox.version}: ${title}`);
       document.querySelector(`#${id}`).innerHTML =
         `<h2>${title}</h2><a class="data greyedout" href="${this.config.BUGZILLA_URL}${url}">?</a>`;
     }
