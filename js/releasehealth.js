@@ -74,7 +74,7 @@ class ReleaseHealth {
    * Start rendering the UI.
    */
   renderUI() {
-    var { title, version } = (this.project !== '')
+    const { title, version } = (this.project !== '')
       ? this.config.projects[this.project]
       : this.config.channels[this.channel];
 
