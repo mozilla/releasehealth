@@ -74,12 +74,9 @@ class ReleaseHealth {
    * Start rendering the UI.
    */
   renderUI() {
-    var { title, version } = this.config.channels[this.channel];
-
-    // Skyline and other projects
-    if (this.project !== '') {
-      var { title, version } = this.config.projects[this.project];
-    }
+    const { title, version } = (this.project !== '')
+      ? this.config.projects[this.project]
+      : this.config.channels[this.channel];
 
     document.querySelector('#title').textContent = `${title} ${version}`;
 
@@ -105,9 +102,12 @@ class ReleaseHealth {
    * Display the measures with a placeholder.
    */
   displayMeasures() {
+    const view = (this.project !== '')
+      ? this.config.projects[this.project]
+      : this.config.channels[this.channel];
+
     for (let { id, title, url } of this.config.bugQueries) {
-      var firefox = this.config.channels[this.channel];
-      url += encodeURI(`&title=${firefox.title} ${firefox.version}: ${title}`);
+      url += encodeURI(`&title=${view.title} ${view.version}: ${title}`);
       document.querySelector(`#${id}`).innerHTML =
         `<h2>${title}</h2><a class="data greyedout" href="${this.config.BUGZILLA_URL}${url}">?</a>`;
     }
