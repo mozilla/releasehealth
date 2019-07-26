@@ -102,7 +102,7 @@ class ReleaseHealth {
    * Display the measures with a placeholder.
    */
   displayMeasures() {
-    var view = (this.project !== '')
+    const view = (this.project !== '')
       ? this.config.projects[this.project]
       : this.config.channels[this.channel];
 
