@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/svg+xml" href="images/firefox-logo-glyph.svg"/>
     <link rel="stylesheet" type="text/css" href="css/releasehealth.css">
-    <link rel="stylesheet" type="text/css" href="css/forkongithub.css">
     <script src="js/releasehealth.js"></script>
   </head>
   <body>
       <header>
-        <h1 id="title">Firefox</h1>
-        <h2 id="subtitle">Unresolved Bug Count</h2>
+        <hgroup>
+          <h1 id="title">Firefox</h1>
+          <h2 id="subtitle">Unresolved Bug Count</h2>
+        </hgroup>
       </header>
       <div id="diag">
       </div>
@@ -24,7 +25,13 @@
       <div class="bugcount skyline" id="skylineUntriaged"></div>
       <div class="bugcount skyline" id="skylineOpenNotP1"></div>
     </div>
-    <span id="forkongithub"><a href="https://github.com/mozilla/ReleaseHealth">Fork me on GitHub</a></span>
-    <footer>Channels and projects &gt; <a href="?channel=release">Release</a> | <a href="?channel=beta">Beta</a> | <a href="?channel=nightly">Nightly</a> | <a href="?project=skyline">Skyline</a></footer>
+    <footer>
+      <nav>
+        <h2>Channels &amp; Projects:</h2>
+        <ul></ul>
+      </nav>
+      <div>
+        <span id="github"><a href="https://github.com/mozilla/ReleaseHealth" aria-label="Fork me on GitHub"><span class="icon" aria-hidden="true">&#xF09B;</span></a></span>
+      </div>
   </body>
 </html>

@@ -5,20 +5,24 @@
   "channels": {
     "release": {
       "pd_key": "LATEST_FIREFOX_VERSION",
-      "title": "Firefox"
+      "title": "Firefox",
+      "short_label": "Release"
     },
     "beta": {
       "pd_key": "LATEST_FIREFOX_DEVEL_VERSION",
-      "title": "Firefox Beta"
+      "title": "Firefox Beta",
+      "short_label": "Beta"
     },
     "nightly": {
       "pd_key": "FIREFOX_NIGHTLY",
-      "title": "Firefox Nightly"
+      "title": "Firefox Nightly",
+      "short_label": "Nightly"
     }
   },
   "projects": {
     "skyline": {
-      "title": " Skyline: Firefox",
+      "title": "Skyline: Firefox",
+      "short_label": "Skyline",
       "version": 70
     }
   },

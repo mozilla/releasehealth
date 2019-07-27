@@ -1,6 +1,15 @@
 @font-face {
   font-family: Moz;
-  src: url("../fonts/MozTT-Medium.ttf");
+  src:
+    url("../fonts/MozTT-Medium.woff2") format('woff2'),
+    url("../fonts/MozTT-Medium.woff") format('woff');
+}
+
+@font-face {
+  font-family: FontAwesome-GitHub;
+  src:
+    url("../fonts/FontAwesome-GitHub.woff2") format('woff2'),
+    url("../fonts/FontAwesome-GitHub.woff") format('woff');
 }
 
 body {
@@ -10,22 +19,57 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
+  line-height: 1.1;
+  font-family: Moz;
   text-align: center;
+}
+
+* {
+  font-weight: normal;
 }
 
 header,
 footer {
-  font-family: Moz;
   margin: 0;
 }
 
 header {
-  font-size: 6vmin;
   background-color: #FF9500;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
-  padding-top: 20px;
+  padding: 3vmax;
+}
+
+header hgroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+header hgroup:before {
+  display: block;
+  height: 18vmax;
+  width: 18vmax;
+  background-image: url('../images/firefox-logo-beta.svg');
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: contain;
+  content: "";
+  pointer-events: none;
+}
+
+header h1 {
+  overflow: auto;
+  margin: 0;
+  font-size: 7vmax;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 3vmax;
 }
 
 #diag {
@@ -33,34 +77,6 @@ header {
   height: 90px;
   background: #FF9500;
   clip-path: polygon(0% 0%, 100% 0%, 139% 100%, 0% 0%);
-}
-
-header h1 {
-  font-weight: normal;
-  font-family: Moz;
-  margin: 0;
-}
-
-header h1:before {
-  background: url('../images/firefox-logo-beta.svg') no-repeat;
-  background-color: #FF9500;
-  display: inline-block;
-  content: " ";
-  height: 200px;
-  width: 200px;
-  vertical-align: middle;
-}
-
-header h2 {
-  font-family: Moz;
-  font-size: 80%;
-  text-indent: 20%;
-  margin-top: -1em;
-}
-
-.release .header-bg,
-.beta .header-bg {
-  border-right: 100vw solid #FF9500;
 }
 
 #content {
@@ -71,23 +87,33 @@ header h2 {
 }
 
 .bugcount {
-  padding: 3vw;
+  display: flex;
+  padding: 3vmax;
 }
 
 .bugcount h2 {
-  margin-top: 0;
-  font-size: 3vw;
+  margin: 0 auto;
+  font-size: 3vmax;
   font-weight: inherit;
-  width: 12ch;
+  width: 20vmax;
 }
 
 .bugcount .data {
-  font-size: 10vw;
-  display: inline-block;
+  font-size: 10vmax;
+  display: block;
+  width: 20vmax;
 }
 
-.greyedout {
+.bugcount .data.greyedout {
   color: #D4DDE4;
+}
+
+.bugcount .data.good {
+  color: #2ABA27;
+}
+
+.bugcount .data.bad {
+  color: #EA3C3D;
 }
 
 a {
@@ -100,15 +126,45 @@ a:hover {
 }
 
 footer {
-  height: 4vh;
-  padding-top: 2vh;
-  font-size: 2vmin;
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 1.5vmax;
+  font-size: 2vmax;
 }
 
-footer a {
-  padding-top: 1vmin;
-  padding-left: 3vmin;
-  padding-right: 3vmin;
+footer nav {
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer nav h2 {
+  margin: 0;
+  font-size: inherit;
+}
+
+footer nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+footer nav li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer div {
+  flex: none;
+}
+
+footer #github .icon {
+  font-family: FontAwesome-GitHub;
+  font-size: 1.2em;
+  vertical-align: top;
 }
 
 .release footer,
@@ -117,25 +173,18 @@ footer a {
 }
 
 /* release rules */
-.release h1:before {
-  background: url('../images/firefox-logo.svg') no-repeat 30% center;
-  background-color: #FF9500;
+.release header hgroup:before {
+  background-image: url('../images/firefox-logo.svg');
 }
 
 /* beta rules */
-.beta h1:before {
-  background: url('../images/firefox-logo-beta.svg') no-repeat 30% center;
-  background-color: #FF9500;
+.beta header hgroup:before {
+  background-image: url('../images/firefox-logo-beta.svg');
 }
 
 /* Nightly rules */
-.nightly h1:before {
-  background: url('../images/firefox-logo-nightly.svg') no-repeat 30% center;
-  background-color: #002147;
-}
-
-.nightly .header-bg {
-  border-right: 100vw solid #002147;
+.nightly header hgroup:before {
+  background-image: url('../images/firefox-logo-nightly.svg');
 }
 
 .nightly #title,
@@ -155,8 +204,7 @@ footer a {
 
 /* Big Screen rules (office TVs) */
 
-.bigscreen footer,
-.bigscreen #forkongithub {
+.bigscreen footer {
   display: none;
 }
 
@@ -168,32 +216,108 @@ footer a {
   color: white;
 }
 
-
-.skyline header h1:before {
+.skyline header hgroup:before {
   background: url('../images/firefox_masterbrand.svg') no-repeat;
 }
 
 body:not(.skyline) .bugcount.skyline {
-  display:none;
+  display: none;
 }
 
 .skyline .bugcount:not(.skyline) {
-  display:none;
+  display: none;
 }
 
-/* smaller dispkay rules */
-@media screen and (max-width: 800px) {
-  header {
-    font-size: 4vmin;
+@media screen and (min-width: 1024px) {
+  .bugcount {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  #content {
+    flex-direction: column;
+    padding: 3vmax;
   }
 
-  header h1:before {
-    width: 80px;
-    height: 80px;
+  .bugcount {
+    flex-direction: row;
+    align-items: center;
+    padding: 2vmax;
+  }
+
+  footer nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  footer nav li {
+    padding: 0 .4em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  footer nav li {
+    padding-left: .8em;
+  }
+
+  footer nav li:not(:last-child)::after {
+    padding-left: .8em;
+    content: '|';
+  }
+}
+
+@media screen and (max-width: 767px) {
+  footer {
+    font-size: 3vmax;
+  }
+}
+
+@media (orientation: portrait) {
+  header hgroup {
+    align-items: center;
+  }
+
+  header hgroup:before {
+    margin-bottom: 2vmax;
   }
 
   header h2 {
-    font-size: 80%;
-    margin-top: 0;
+    margin-top: 1vmax;
+  }
+
+  footer {
+    padding: 3vmax;
+  }
+
+  footer,
+  footer nav {
+    flex-direction: column;
+  }
+
+  footer nav li {
+    margin-top: .2em;
+  }
+
+  footer div {
+    margin-top: 1em;
+  }
+}
+
+@media (orientation: landscape) {
+  header hgroup {
+    padding-left: 22vmax;
+    min-height: 18vmax;
+  }
+
+  header hgroup:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  header h2 {
+    white-space: nowrap;
   }
 }
