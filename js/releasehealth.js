@@ -78,11 +78,12 @@ class ReleaseHealth {
       ? this.config.projects[this.project]
       : this.config.channels[this.channel];
 
-    document.querySelector('#title').textContent = `${title} ${version}`;
+    document.querySelector('#title').innerHTML = `${title}&nbsp;${version}`;
 
     this.addVersionToQueryURLs(version);
     this.displayMeasures();
     this.getBugCounts();
+    this.renderNav();
 
     // Update counts periodically
     window.setInterval(() => this.getBugCounts(), this.config.refreshMinutes * 60 * 1000);
@@ -150,6 +151,31 @@ class ReleaseHealth {
 
     $placeholder.textContent = count;
     $placeholder.classList.remove('greyedout');
+
+    if (count === 0) {
+      $placeholder.classList.add('good');
+    }
+
+    if (count >= 100) {
+      $placeholder.classList.add('bad');
+    }
+  }
+
+  /**
+   * Rendering the navigation links on the footer.
+   */
+  renderNav() {
+    let content = '';
+
+    for (const [id, { short_label }] of Object.entries(this.config.channels)) {
+      content += `<li><a href="?channel=${id}">${short_label}</a></li>`;
+    }
+
+    for (const [id, { short_label }] of Object.entries(this.config.projects || {})) {
+      content += `<li><a href="?project=${id}">${short_label}</a></li>`;
+    }
+
+    document.querySelector('footer nav ul').innerHTML = content;
   }
 };
 
