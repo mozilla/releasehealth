@@ -1,15 +1,11 @@
 @font-face {
   font-family: Moz;
-  src:
-    url("../fonts/MozTT-Medium.woff2") format('woff2'),
-    url("../fonts/MozTT-Medium.woff") format('woff');
+  src: url("../fonts/MozTT-Medium.woff2") format('woff2');
 }
 
 @font-face {
   font-family: FontAwesome-GitHub;
-  src:
-    url("../fonts/FontAwesome-GitHub.woff2") format('woff2'),
-    url("../fonts/FontAwesome-GitHub.woff") format('woff');
+  src: url("../fonts/FontAwesome-GitHub.woff2") format('woff2');
 }
 
 body {
