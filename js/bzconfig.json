@@ -56,6 +56,11 @@
       "id": "skylineUntriaged",
       "title": "Untriaged",
       "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=--"
+    },
+    {
+      "id": "skylineFixed",
+      "title": "Fixed",
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=RESOLVED"
     }
   ],
   "refreshMinutes": 30
