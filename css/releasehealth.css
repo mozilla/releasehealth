@@ -216,6 +216,15 @@ footer #github .icon {
   background: url('../images/firefox_masterbrand.svg') no-repeat;
 }
 
+.skyline .bugcount {
+  padding: 2vmax;
+}
+
+.skyline .bugcount h2 {
+  font-size: 4vmax;
+}
+
+
 body:not(.skyline) .bugcount.skyline {
   display: none;
 }
@@ -224,6 +233,11 @@ body:not(.skyline) .bugcount.skyline {
   display: none;
 }
 
+@media (orientation: portrait) {
+  .skyline header h1 {
+    font-size: 5vmax;
+  }
+}
 @media screen and (min-width: 1024px) {
   .bugcount {
     flex-direction: column;
