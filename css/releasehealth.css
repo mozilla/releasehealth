@@ -216,6 +216,10 @@ footer #github .icon {
   background: url('../images/firefox_masterbrand.svg') no-repeat;
 }
 
+.skyline #subtitle span {
+  display: none;
+}
+
 .skyline .bugcount {
   padding: 2vmax;
 }
