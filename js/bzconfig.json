@@ -45,22 +45,22 @@
     {
       "id": "skylineP1",
       "title": "P1",
-      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=P1"
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=P1&keywords=meta&keywords_type=nowords&f1=cf_status_firefox70&o1=anyexact&v1=affected%2C%20---%2C%3F"
     },
     {
       "id": "skylineOpenNotP1",
       "title": "P2-P5",
-      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=P2&priority=P3&priority=P4&priority=P5"
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=P2&priority=P3&priority=P4&priority=P5&f1=cf_status_firefox70&o1=anyexact&v1=affected%2C%20---%2C%3F"
     },
     {
       "id": "skylineUntriaged",
       "title": "Untriaged",
-      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=--"
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&priority=--&keywords=meta&keywords_type=nowords&f1=cf_status_firefox70&o1=anyexact&v1=affected%2C%20---%2C%3F"
     },
     {
       "id": "skylineFixed",
       "title": "Fixed",
-      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=RESOLVED"
+      "url": "?query_format=advanced&status_whiteboard_type=allwordssubstr&status_whiteboard=%5Bskyline%5D&bug_status=RESOLVED&keywords=meta&keywords_type=nowords"
     }
   ],
   "refreshMinutes": 30
