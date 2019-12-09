@@ -44,7 +44,7 @@ class ReleaseHealth {
   getProject() {
     const project = this.params.get('project');
 
-    return project && ['skyline'].includes(project) ? project : '';
+    return project && ['exampleProject'].includes(project) ? project : '';
   }
 
   /**
@@ -172,7 +172,9 @@ class ReleaseHealth {
     }
 
     for (const [id, { short_label }] of Object.entries(this.config.projects || {})) {
-      content += `<li><a href="?project=${id}">${short_label}</a></li>`;
+      if (id !== 'exampleProject') {
+        content += `<li><a href="?project=${id}">${short_label}</a></li>`;
+      }
     }
 
     document.querySelector('footer nav ul').innerHTML = content;
