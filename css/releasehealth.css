@@ -204,44 +204,6 @@ footer #github .icon {
   display: none;
 }
 
-/* Skyline rules, to be removed after the Skyline project */
-.skyline header,
-.skyline #diag,
-.skyline footer {
-  background-color: #20123a;
-  color: white;
-}
-
-.skyline header hgroup:before {
-  background: url('../images/firefox_masterbrand.svg') no-repeat;
-}
-
-.skyline #subtitle span {
-  display: none;
-}
-
-.skyline .bugcount {
-  padding: 2vmax;
-}
-
-.skyline .bugcount h2 {
-  font-size: 4vmax;
-}
-
-
-body:not(.skyline) .bugcount.skyline {
-  display: none;
-}
-
-.skyline .bugcount:not(.skyline) {
-  display: none;
-}
-
-@media (orientation: portrait) {
-  .skyline header h1 {
-    font-size: 5vmax;
-  }
-}
 @media screen and (min-width: 1024px) {
   .bugcount {
     flex-direction: column;
